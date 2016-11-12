@@ -23,14 +23,14 @@ if (!file.exists("humanActivity.zip")){
 ############ Merge test and training data sets ############ 
 
 # read test data
-testset_x <- read.table("UCI HAR Dataset/test/X_test.txt")
-testset_y <- read.table("UCI HAR Dataset/test/y_test.txt")
-testset_subject <- read.table("UCI HAR Dataset/test/subject_test.txt")
+testset_x <- read.table("test/X_test.txt")
+testset_y <- read.table("test/y_test.txt")
+testset_subject <- read.table("test/subject_test.txt")
 
 # read training data
-trainingset_x <- read.table("UCI HAR Dataset/train/X_train.txt")
-trainingset_y <- read.table("UCI HAR Dataset/train/y_train.txt")
-trainingset_subject <- read.table("UCI HAR Dataset/train/subject_train.txt")
+trainingset_x <- read.table("train/X_train.txt")
+trainingset_y <- read.table("train/y_train.txt")
+trainingset_subject <- read.table("train/subject_train.txt")
 
 # combine x data sets
 set_x <- rbind(testset_x, trainingset_x)
@@ -45,7 +45,7 @@ set_subject <- rbind(testset_subject, trainingset_subject)
 
 ############ Extract measurements on the mean and standard deviation for each measurement ############ 
 
-features <- read.table("UCI HAR Dataset/features.txt")
+features <- read.table("features.txt")
 
 filtered_feat <- grep(".*(mean|std).*", features[,2]) 
 
@@ -57,7 +57,7 @@ set_x <- set_x[, filtered_feat]
 ############ Use descriptive activity names to name the activities in the data set ############ 
 
 # read the label file
-activities <- read.table("UCI HAR Dataset/activity_labels.txt")
+activities <- read.table("activity_labels.txt")
 
 # rename the activities in set_y
 set_y[,1]<-activities[match(set_y[,1], activities[,1]),2]
